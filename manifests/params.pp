@@ -31,6 +31,20 @@ class monit::params {
       $service_has_status = true
       $default_conf_tpl   = undef
     }
+    'Gentoo': {
+      $conf_file          = '/etc/monitrc'
+      $conf_dir           = '/etc/monit.d'
+      $default_conf       = undef
+      $monit_package      = 'monit'
+      $monit_service      = 'monit'
+      $id_dir             = '/var/lib/monit'
+      $idfile             = '/var/lib/monit/id'
+      $logfile            = '/var/log/monit'
+      $logrotate_script   = '/etc/logrotate.d/monit'
+      $logrotate_source   = 'logrotate.gentoo.erb'
+      $service_has_status = true
+      $default_conf_tpl   = undef
+    }
     'Debian': {
       $conf_file        = '/etc/monit/monitrc'
       $conf_dir         = '/etc/monit/conf.d'
