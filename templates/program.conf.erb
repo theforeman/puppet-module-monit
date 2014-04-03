@@ -9,7 +9,7 @@ check program <%= @name %> with path "<%= @program_file %>"
 <% end -%>
 <% end -%>
 <% if @stop_script -%>
-  stop program  = "<%= @stop_script %>"
+  stop program  = "<%= @stop_script %>"<%= " as uid \"#{uid}\" and gid \"#{gid}\"" if @uid != '' and @gid != '' %>
 <% if @stop_timeout -%>
     with timeout <%= @stop_timeout %> seconds
 <% end -%>
