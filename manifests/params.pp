@@ -66,21 +66,29 @@ class monit::params {
         }
         'Ubuntu': {
           $logrotate_source   = 'logrotate.ubuntu.erb'
-          $service_has_status = true
           case $::lsbdistrelease {
+            '10.04': {
+              $service_has_status = false
+              $default_conf_tpl = 'monit.default.conf.ubuntu.lucid.erb'
+            }
             '10.10': {
+              $service_has_status = true
               $default_conf_tpl = 'monit.default.conf.ubuntu.maverick.erb'
             }
             '12.04': {
+              $service_has_status = true
               $default_conf_tpl = 'monit.default.conf.ubuntu.precise.erb'
             }
             '12.10': {
+              $service_has_status = true
               $default_conf_tpl = 'monit.default.conf.ubuntu.quantal.erb'
             }
             '13.04': {
+              $service_has_status = true
               $default_conf_tpl = 'monit.default.conf.ubuntu.raring.erb'
             }
             '13.10': {
+              $service_has_status = true
               $default_conf_tpl = 'monit.default.conf.ubuntu.saucy.erb'
             }
             default: {
