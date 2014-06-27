@@ -91,6 +91,10 @@ class monit::params {
               $service_has_status = true
               $default_conf_tpl = 'monit.default.conf.ubuntu.saucy.erb'
             }
+            '14.04': {
+              $service_has_status = true
+              $default_conf_tpl = 'monit.default.conf.ubuntu.trusty.erb'
+            }
             default: {
               fail("Unsupported lsbdistid:${::lsbdistid}/${::lsbdistrelease}")
             }
