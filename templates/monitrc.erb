@@ -74,6 +74,9 @@ set mailserver <%= @mailserver %>
 ## see http://mmonit.com/).
 #
 # set mmonit http://monit:monit@192.168.1.10:8080/collector
+<% unless @collector.nil? -%>
+  set mmonit <%= @collector %>/collector
+<% end -%>
 #
 #
 ## Monit by default uses the following alert mail format:
@@ -118,9 +121,22 @@ set alert <%= @admin %>                       # receive all alerts
 ## services monitored and manage services from a web interface. See the
 ## Monit Wiki if you want to enable SSL for the web server. 
 #
-set httpd port 2812 and
+set httpd port <%= @httpd_port %> and
+<% if @enable_ssl == true -%>
+    SSL ENABLE
+<% end -%>
+<% unless @pemfile.nil? -%>
+    PEMFILE <%= @pemfile %>
+<% end -%>
+<% if @allow_self_cert == true -%>
+    ALLOWSELFCERTIFICATION
+<% end -%>
+<% if @only_localhost == true -%>
     use address localhost  # only accept connection from localhost
-    allow localhost        # allow localhost to connect to the server and
+<% end -%>
+<% Array(@allows).each do |allow| -%>
+    allow <%= allow %>
+<% end -%>
 #     allow admin:monit      # require user 'admin' with password 'monit'
 #     allow @monit           # allow users of group 'monit' to connect (rw)
 #     allow @users readonly  # allow users of group 'users' to connect readonly
