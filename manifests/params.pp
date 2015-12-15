@@ -44,11 +44,20 @@ class monit::params {
       case $::operatingsystem {
         'Debian': {
           case $::lsbdistcodename {
-            'squeeze': { $service_has_status = false }
-            default:   { $service_has_status = true }
+            'squeeze': {
+              $service_has_status = false
+              $default_conf_tpl   = 'monit.default.conf.ubuntu.maverick.erb'
+            }
+            'wheezy': {
+              $service_has_status = true
+              $default_conf_tpl   = 'monit.default.conf.ubuntu.maverick.erb'
+            }
+            default:   {
+              $service_has_status = true
+              $default_conf_tpl = 'monit.default.conf.ubuntu.precise.erb'
+            }
           }
           $logrotate_source = 'logrotate.debian.erb'
-          $default_conf_tpl = 'monit.default.conf.ubuntu.maverick.erb'
         }
         'Ubuntu': {
           $logrotate_source   = 'logrotate.ubuntu.erb'
